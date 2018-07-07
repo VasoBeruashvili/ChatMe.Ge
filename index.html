@@ -1,0 +1,467 @@
+<html>
+<head>
+	<title>ChatMe.Ge - ჩვენ არ ვინახავთ!</title>
+	<LINK href="favicon.ico" type=image/x-icon rel="shortcut icon">
+	
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+	
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	<style>
+		body{			
+          background-image: url('background.png');
+		}
+		
+		.iphone {
+		  background: #aaa;
+		  border-radius: 40px;
+		  font-family: Helvetica, Arial, sans-serif;
+		  font-size: 14px;
+		  font-weight: 100;
+		  height: 620px;
+		  margin: 0 auto;
+		  max-width: 320px;
+		  padding: 80px 15px;
+		  position: relative;
+		}
+		.iphone:before {
+		  background: rgba(0,0,0,0.35);
+		  border-radius: 4px;
+		  content: " ";
+		  height: 8px;
+		  left: 50%;
+		  margin-left: -30px;
+		  position: absolute;
+		  top: 45px;
+		  width: 60px;
+		  z-index: 99;
+		}
+		.iphone:after {
+		  background: rgba(0,0,0,0.35);
+		  border: 4px solid rgba(255,255,255,0.6);
+		  border-radius: 50%;
+		  bottom: 11px;
+		  content: " ";
+		  height: 50px;
+		  left: 50%;
+		  margin-left: -29px;
+		  position: absolute;
+		  width: 50px;
+		  z-index: 99;
+		}
+		
+		#screen {
+		  background: #fff;
+		  border-radius: 2px;
+		  border-bottom-right-radius: 0;
+		  border-bottom-left-radius: 0;
+		  height: 71.2%;
+		  overflow: auto;
+		  padding: 10px 5px 5px 5px;
+		  position: relative;
+		  z-index: 1;
+		}
+		
+		#sign-screen {
+		  background: #fff;
+		  border-radius: 2px;
+		  border-bottom-right-radius: 0;
+		  border-bottom-left-radius: 0;
+		  height: 81%;
+		  overflow: auto;
+		  padding: 10px 10px 0 10px;
+		  position: relative;
+		  z-index: 1;
+		}
+		#sign-screen:after {
+		  clear: both;
+		  content: " ";
+		  display: table;
+		}
+		
+		#screen:after {
+		  clear: both;
+		  content: " ";
+		  display: table;
+		}
+	
+		#chat{
+			height: 400px;
+			border-radius: 5px;
+			width: 500px;
+			overflow: auto;
+			margin: 50px auto;
+			
+			background-color: #fff;
+			
+			/*border: 1px solid #dadada;
+			border-radius: 7px;
+			outline: none;
+			border-color: #9ecaed;
+			box-shadow: 0 0 10px #9ecaed;*/
+		}
+		#contentWrap{
+			display: none;
+		}
+
+		#send-message{
+			margin: 5px 5px 5px 5px;
+			/*width: 500px;*/
+		}
+		#send-message-wrapper{
+			background-color: #fff;
+			padding: 5px;
+			border-bottom-right-radius: 2px;
+			border-bottom-left-radius: 2px;
+		}
+		
+		#sign-screen-wrapper{
+			background-color: #fff;
+			padding: 5px 10px 5px 10px;
+			height: 93px;
+			border-bottom-right-radius: 2px;
+			border-bottom-left-radius: 2px;
+		}
+		
+		#users{
+			margin: 0 auto;
+			width: 100px;
+			/*display: none;*/
+		}
+
+		#operator{
+		
+			position: relative;
+		
+			/*margin: 5px 5px 0 80px;*/
+			margin: 0 5px 0 40px;
+			color: #505050;
+			border-radius: 5px;
+			padding: 10px;
+			border:1px solid #68e9ff;
+			/*white-space: pre-wrap;*/
+			word-wrap: break-word;
+			
+			border-left: none;
+		
+			background-color: #9bf1ff; background-image: -webkit-gradient(linear, left top, left bottom, from(#9bf1ff), to(#4fd4f5));
+			background-image: -webkit-linear-gradient(top, #9bf1ff, #4fd4f5);
+			background-image: -moz-linear-gradient(top, #9bf1ff, #4fd4f5);
+			background-image: -ms-linear-gradient(top, #9bf1ff, #4fd4f5);
+			background-image: -o-linear-gradient(top, #9bf1ff, #4fd4f5);
+			background-image: linear-gradient(to bottom, #9bf1ff, #4fd4f5);filter:progid:dximagetransform.microsoft.gradient(gradienttype=0,startcolorstr=#9bf1ff, endcolorstr=#4fd4f5);
+		}
+		
+		#operator:after, #operator:before {
+			right: 100%;
+			top: 50%;
+			border: solid transparent;
+			content: " ";
+			height: 0;
+			width: 0;
+			position: absolute;
+			pointer-events: none;
+		}
+
+		#operator:after {
+			border-color: rgba(136, 183, 213, 0);
+			border-right-color: #9bf1ff;
+			border-width: 9px;
+			margin-top: -12px;
+		}
+		#operator:before {
+			border-color: rgba(194, 225, 245, 0);
+			margin-top: -14px;
+		}
+		
+		
+		#client{
+			
+			position: relative;
+		
+			/*margin: 5px 80px 0 5px;*/
+			margin: 0 40px 0 5px;
+			color: #505050;
+			border-radius: 5px;
+			padding: 10px;
+			border:1px solid #f7f25f;
+			/*white-space: pre-wrap;*/
+			word-wrap: break-word;
+			
+			border-right: none;
+		
+			 background-color: #faf68f; background-image: -webkit-gradient(linear, left top, left bottom, from(#faf68f), to(#f3ed53));
+			 background-image: -webkit-linear-gradient(top, #faf68f, #f3ed53);
+			 background-image: -moz-linear-gradient(top, #faf68f, #f3ed53);
+			 background-image: -ms-linear-gradient(top, #faf68f, #f3ed53);
+			 background-image: -o-linear-gradient(top, #faf68f, #f3ed53);
+			 background-image: linear-gradient(to bottom, #faf68f, #f3ed53);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#faf68f, endColorstr=#f3ed53);
+		}
+		
+		#client:after, #client:before {
+			left: 100%;
+			top: 50%;
+			border: solid transparent;
+			content: " ";
+			height: 0;
+			width: 0;
+			position: absolute;
+			pointer-events: none;
+		}
+
+		#client:after {
+			border-color: rgba(109, 213, 136, 0);
+			border-left-color: #faf68f;
+			border-width: 9px;
+			margin-top: -12px;
+		}
+		#client:before {
+			border-color: rgba(194, 225, 245, 0);
+			border-left-color: #faf68f;
+		}
+		
+		#nickWrap{
+			margin: 0 auto;
+		}
+		
+		#nickname{
+			margin-bottom: 10px;
+		}
+		
+		#message{
+			margin-bottom: 10px;
+		}
+		
+		textarea{
+			resize: none;
+		} 
+		
+		#outer-sign {
+            display: table;
+            position: absolute;
+            height: 100%;
+            width: 100%;
+        }
+
+        #middle-sign {
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+        #inner-sign {
+            margin-left: auto;
+            margin-right: auto; 
+
+        }
+		
+		
+		#outer-message {			
+			display: none;
+        }
+
+        #middle-message {			
+			display: none;
+        }
+
+        #inner-message {			
+			display: none;
+        }
+		
+		.dateTime{
+			margin-top: -15px;
+			color: #555555;
+			float: right;
+		}
+		
+	</style>
+</head>
+<body>
+                    <audio id="sound" src="sound.ogg" type="audio/ogg"></audio>
+
+							<div id="outer-sign">
+							<div id="middle-sign">
+							<div id="inner-sign">
+							
+		<div id="nickWrap">
+		<div class="iphone">
+		<div id="sign-screen"></div>
+			<div id="sign-screen-wrapper">
+			<form class="form-signin" id="setNick">
+				<input type="text" id="nickname" class="form-control" placeholder="მომხმარებლის სახელი" autofocus required>
+				<button class="btn btn-md btn-primary btn-block" id="btnConnect" type="submit">დაწყება</button>
+			</form>
+			</div>	
+		  
+		  </div>
+		  </div>
+		  
+							</div>
+							</div>
+							</div>
+
+							
+							
+							<div id="outer-message">
+							<div id="middle-message">
+							<div id="inner-message">
+							
+	<div id="contentWrap">
+		<div id="chatWrap">
+		<div id="users"></div>
+			<div class="iphone">
+				<div id="screen">					
+				</div>
+				<div id="send-message-wrapper">
+					<form id="send-message">
+						<textarea rows="3" id="message" class="form-control" placeholder="ტექსტი..."></textarea>
+						<button class="btn btn-md btn-primary btn-block" id="btnSend">გაგზავნა</button>
+					</form>
+				</div>
+			</div>			
+		</div>
+	</div>
+	
+							</div>
+							</div>
+							</div>
+	
+
+	<script src="/socket.io/socket.io.js"></script>
+	<script>
+		jQuery(function($){
+			var socket = io.connect();
+			var $nickForm = $('#setNick');
+			var $nickError = $('#nickError');
+			var $nickBox = $('#nickname');
+			var $users = $('#users');
+			var $messageForm = $('#send-message');
+			var $messageBox = $('#message');
+			var $chat = $('#screen');
+			
+			var $btnSend = $('#btnSend');
+			
+			function GetCustomTimeFormat(){
+				var date = new Date();
+				
+				var result;
+				
+				var hours = date.getHours();
+				var minutes = date.getMinutes();
+				//var seconds = date.getSeconds();
+				
+				if(hours.toString().length == 1){
+					hours = '0' + hours;
+				}
+				
+				if(minutes.toString().length == 1){
+					minutes = '0' + minutes;
+				}
+				
+				/*if(seconds.toString().length == 1){
+					seconds = '0' + seconds;
+				}*/
+				
+				//result = hours + ':' + minutes + ':' + seconds;
+				result = hours + ':' + minutes;
+				
+				return result;
+			}
+			
+			$messageBox.keyup(function(e) {
+				var s = $messageBox.val();
+				while (s.indexOf("\n") > -1){
+					s = s.replace("\n","");
+				}
+				$messageBox.val(s);
+				if(e.keyCode == 13) {
+				    if($messageBox.val() != ''){
+						$btnSend.click();
+					}else{
+						e.preventDefault();
+					}			
+				}
+			});
+			
+			$nickForm.submit(function(e){
+				e.preventDefault();				
+				
+				socket.emit('new user', $nickBox.val(), function(data){
+					if(data.clbk){					
+						$('#outer-sign').hide();
+						$('#middle-sign').hide();
+						$('#inner-sign').hide();
+						$('#nickWrap').hide();
+						
+						
+						$('#outer-message').show();
+						$('#outer-message').css('display', 'table');
+						$('#outer-message').css('position', 'absolute');
+						$('#outer-message').css('height', '100%');
+						$('#outer-message').css('width', '100%');
+						
+						$('#middle-message').show();
+						$('#middle-message').css('display', 'table-cell');
+						$('#middle-message').css('vertical-align', 'middle');
+						
+						$('#inner-message').show();
+						$('#inner-message').css('margin-left', 'auto');
+						$('#inner-message').css('margin-right', 'auto');
+						
+						$('#contentWrap').show();
+						$messageBox.focus();
+					} else{
+						alert('მომხმარებლის სახელი "' + data.nickName + '" დროებით დაკავებულია, შეიყვანეთ სხვა.')
+					}
+				});
+				$nickBox.val('');
+				$nickBox.focus();
+			});
+			
+			socket.on('usernames', function(data){
+				var html = '';
+				for(i=0; i < data.length; i++){
+					html += data[i] + '<br/>'
+				}
+				$users.html(html);
+			});
+			
+			$btnSend.click(function(e){			
+			    if ($messageBox.val() != '') {			        
+			        e.preventDefault();			        
+					socket.emit('send message', $messageBox.val(), function(data){
+						$chat.append('<span class="error">' + data + "</span><br/>");					
+					});
+					$messageBox.val('');
+					$messageBox.focus();
+				}else{
+					e.preventDefault();
+					$messageBox.focus();
+				}
+			});
+			
+			socket.on('new message', function(data){			    
+				if(data.auth){
+					var item = $('<div id="operator">' + '<b>' + "FINA" + ': </b>' + data.msg + '<br><br><p class="dateTime">' + GetCustomTimeFormat() + '</p></div><br>').fadeIn(1000);
+					$chat.append(item);
+					$("#screen").animate({ scrollTop: $('#screen')[0].scrollHeight}, 500);
+				}else{
+					var item = $('<div id="client">' + '<b>' + data.nick + ': </b>' + data.msg + '<br><br><p class="dateTime">' + GetCustomTimeFormat() + '</p></div><br>').fadeIn(1000);
+					$chat.append(item);
+					$("#screen").animate({ scrollTop: $('#screen')[0].scrollHeight}, 500);
+				}	
+				$('#sound')[0].play();
+			});
+			
+			/* socket.on('whisper', function(data){
+				$chat.append('<span class="whisper"><b>' + data.nick + ': </b>' + data.msg + "</span><br/>");
+			}); */
+		});
+	</script>
+</body>
+</html>
